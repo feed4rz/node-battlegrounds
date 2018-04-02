@@ -6,7 +6,7 @@ PUBG Web API wrapper for nodejs
 - [Description](#description)
 - [Examples](https://github.com/feed4rz/node-battlegrounds/tree/master/examples)
 - [Classes](#classes)
-- - [API](#api)
+- - [API](#apiapikey-platform)
 - - [Player](#player)
 - - [Match](#match)
 
