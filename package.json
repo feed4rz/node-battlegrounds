@@ -1,0 +1,27 @@
+{
+  "name": "battlegrounds",
+  "version": "1.0.0",
+  "description": "PUBG Web API wrapper for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feed4rz/node-battlegrounds.git"
+  },
+  "keywords": [
+    "pubg",
+    "web",
+    "api"
+  ],
+  "author": "feed4rz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/feed4rz/node-battlegrounds/issues"
+  },
+  "homepage": "https://github.com/feed4rz/node-battlegrounds#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
