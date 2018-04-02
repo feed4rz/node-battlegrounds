@@ -1,5 +1,5 @@
 # battlegrounds
-PUBG Web API wrapper for nodejs
+PUBG Web [API](https://documentation.playbattlegrounds.com) wrapper for nodejs
 
 - [Installation](#install)
 - [Usage](#usage)
