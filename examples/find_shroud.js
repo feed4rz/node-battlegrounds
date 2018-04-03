@@ -4,12 +4,12 @@ const api = new API('ENTER YOUR APIKEY', 'pc-na')
 
 async function findShroud() {
   try {
-    const res = await api.players({ names: ['shroud'] })
+    const res = await api.getPlayer({ id: 'account.d50fdc18fcad49c691d38466bed6f8fd' })
 
     console.log('result:')
-    console.log(res[0].matches)
+    console.log(res)
 
-    getMatch(res[0])
+    getMatch(res)
   } catch(err) {
   	console.log('error:')
     console.error(err)

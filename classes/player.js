@@ -39,7 +39,7 @@ class Player {
 
   async get() {
     try {
-      const res = await this._api.players({ id: this.id })
+      const res = await this._api.getPlayer({ id: this.id })
 
       Object.assign(this, res)
 

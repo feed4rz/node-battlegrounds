@@ -41,7 +41,7 @@ class Match {
 
 	async get(){
 		try {
-			const res = await this._api.matches({ id: this.id })
+			const res = await this._api.getMatch({ id: this.id })
 
 			Object.assign(this, res)
 

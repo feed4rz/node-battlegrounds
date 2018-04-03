@@ -58,12 +58,12 @@ class API {
   }
 
   /*
-  	matches:
+  	match:
   		/matches/{id}
   	data:
   		{	id }
   */
-  async matches(params) {
+  async getMatch(params) {
   	/* Validating parameters */
     if(!params.id) throw new MissingParameter('id')
     if(!this._valid(params.id, /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i)) {
@@ -84,27 +84,43 @@ class API {
   }
 
   /*
-  	players:
-  		/players
+  	player:
   		/players/{id}
   	data:
-  		{	id, ids, names }
+  		{	id }
   */
-  async players(params) {
+  async getPlayer(params) {
   	/* Validating parameters */
     if(params.id && !this._valid(params.id, /account\.[0-9a-f]{32}/i)) {
     	throw new InvalidParameter('id')
     }
+
+    /* Applying parameters to path */
+    const platform = params.platform || this.platform
+    const path = `/${platform}/players/${params.id}`
+
+    try {
+      const res = await this._req(path)
+
+      return new Player(res, this)
+    } catch(err) {
+      throw err
+    }
+  }
+
+  /*
+  	players:
+  		/players
+  	data:
+  		{	ids, names }
+  */
+  async getPlayers(params) {
+  	/* Validating parameters */
     if(params.ids && !this._valid(params.ids, /account\.[0-9a-f]{32}/i)) {
     	throw new InvalidParameter('ids')
     }
-    if(!params.id && !params.ids && !params.names) {
-    	throw new MissingParameter('id', 'ids', 'names')
-    }
-
-    /* Reformatting parameters */
-    if(!params.id && params.ids && params.ids.length == 1) {
-    	params.id = params.ids[0]
+    if(!params.ids && !params.names) {
+    	throw new MissingParameter('ids', 'names')
     }
 
     /* Creating a query if needed */
@@ -117,9 +133,8 @@ class API {
     }
 
     /* Applying parameters to path */
-    const id = params.id ? `/${params.id}` : ''
     const platform = params.platform || this.platform
-    const path = `/${platform}/players${id}${query}`
+    const path = `/${platform}/players${query}`
 
     try {
       const res = await this._req(path)
