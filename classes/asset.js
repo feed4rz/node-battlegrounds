@@ -1,10 +1,10 @@
 class Asset {
-	constructor(data, api) {
-		this._api = api
-		this.raw = data
+  constructor(data, api) {
+    this._api = api
+    this.raw = data
 
-		this.id = data.id
-	}
+    this.id = data.id
+  }
 }
 
 module.exports = Asset

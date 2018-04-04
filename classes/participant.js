@@ -1,18 +1,17 @@
-class Roster {
+class Participant {
   constructor(data, api) {
     this._api = api
     this.raw = data
 
     if(data.attributes) {
-      const { id, attributes, relationships } = data
+      const { id, attributes } = data
 
       this.id = id
       this.attributes = attributes
-      this.participants = relationships.participants.data
     } else {
       this.id = data.id
     }
   }
 }
 
-module.exports = Roster
+module.exports = Participant

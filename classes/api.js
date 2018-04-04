@@ -34,7 +34,7 @@ class API {
       if(res.status == 404 || res.status == 401 || res.status == 415) throw new RequestError(res.data)
       if(res.status == 429) throw new RequestError([{ title: 'Access Denied', detail: 'Too many requests' }])
 
-      return res.data.data
+      return res.data
     } catch(err) {
       throw err
     }
@@ -58,16 +58,16 @@ class API {
   }
 
   /*
-  	match:
-  		/matches/{id}
-  	data:
-  		{	id }
+    match:
+      /matches/{id}
+    data:
+      { id }
   */
   async getMatch(params) {
-  	/* Validating parameters */
+    /* Validating parameters */
     if(!params.id) throw new MissingParameter('id')
     if(!this._valid(params.id, /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i)) {
-    	throw new InvalidParameter('id')
+      throw new InvalidParameter('id')
     }
 
     /* Applying parameters to path */
@@ -77,22 +77,22 @@ class API {
     try {
       const res = await this._req(path)
 
-      return new Match(res, this)
+      return new Match(res.data, res.included, this)
     } catch(err) {
       throw err
     }
   }
 
   /*
-  	player:
-  		/players/{id}
-  	data:
-  		{	id }
+    player:
+      /players/{id}
+    data:
+      { id }
   */
   async getPlayer(params) {
-  	/* Validating parameters */
+    /* Validating parameters */
     if(params.id && !this._valid(params.id, /account\.[0-9a-f]{32}/i)) {
-    	throw new InvalidParameter('id')
+      throw new InvalidParameter('id')
     }
 
     /* Applying parameters to path */
@@ -102,34 +102,34 @@ class API {
     try {
       const res = await this._req(path)
 
-      return new Player(res, this)
+      return new Player(res.data, this)
     } catch(err) {
       throw err
     }
   }
 
   /*
-  	players:
-  		/players
-  	data:
-  		{	ids, names }
+    players:
+      /players
+    data:
+      { ids, names }
   */
   async getPlayers(params) {
-  	/* Validating parameters */
+    /* Validating parameters */
     if(params.ids && !this._valid(params.ids, /account\.[0-9a-f]{32}/i)) {
-    	throw new InvalidParameter('ids')
+      throw new InvalidParameter('ids')
     }
     if(!params.ids && !params.names) {
-    	throw new MissingParameter('ids', 'names')
+      throw new MissingParameter('ids', 'names')
     }
 
     /* Creating a query if needed */
     let query = ''
     if(params.names && params.names.length > 0) {
-    	query = `?filter[playerNames]=${params.names}`
+      query = `?filter[playerNames]=${params.names}`
     }
     if(params.ids && params.ids.length > 0) {
-    	query = `?filter[playerIds]=${params.ids}`
+      query = `?filter[playerIds]=${params.ids}`
     }
 
     /* Applying parameters to path */
@@ -140,7 +140,7 @@ class API {
       const res = await this._req(path)
 
       for(let i = 0; i < res.length; i++) {
-      	res[i] = new Player(res[i], this)
+        res[i] = new Player(res[i], this)
       }
 
       return res

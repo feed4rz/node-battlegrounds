@@ -1,55 +1,71 @@
 /* Classes */
 const Asset = require('./asset.js')
 const Roster = require('./roster.js')
+const Participant = require('./participant.js')
 
 class Match {
-	constructor(data, api) {
-		this._api = api
-		this.raw = data
+  constructor(data, included, api) {
+    this._api = api
+    this.raw = data
 
-		if(data.attributes) {
-			const { id, attributes, relationships } = data
+    if(data.attributes) {
+      const { id, attributes, relationships } = data
 
-			this.id = id
-			this.attributes = attributes
-			this.rosters = relationships.rosters
-			this.assets = relationships.assets
-			this.spectators = []
-			this.rounds = []
+      this.id = id
+      this.attributes = attributes
+      this.rosters = relationships.rosters.data
+      this.assets = relationships.assets.data
+      this.spectators = relationships.spectators.data
+      this.rounds = relationships.rounds.data
+      this.participants = []
 
-			const rosters = []
-			for(let i = 0; i < this.rosters.data.length; i++) {
-				const a = this.rosters.data[i]
+      const rosters = []
+      const assets = []
+      const participants = []
 
-				rosters.push(new Roster(a, this._api))
-			}
+      for(let i = 0; i < this.assets.length; i++) {
+        const a = this.assets[i]
 
-			this.rosters = rosters
+        assets.push(new Asset(a, this._api))
+      }
 
-			const assets = []
-			for(let i = 0; i < this.assets.data.length; i++) {
-				const a = this.assets.data[i]
+      for(let i = 0; i < included.length; i++) {
+        const inc = included[i]
 
-				assets.push(new Asset(a, this._api))
-			}
+        if(inc.type == 'roster') {
+          rosters.push(new Roster(inc, this._api))
+        } else if(inc.type == 'participant') {
+          participants[inc.id] = new Participant(inc, this._api)
+        }
+      }
 
-			this.assets = assets
-		} else {
-			this.id = data.id
-		}
-	}
+      for(let i = 0; i < rosters.length; i++) {
+        for(let j = 0; j < rosters[i].participants.length; j++) {
+          const p = rosters[i].participants[j]
 
-	async get(){
-		try {
-			const res = await this._api.getMatch({ id: this.id })
+          rosters[i].participants[j] = participants[p.id]
+        }
+      }
 
-			Object.assign(this, res)
+      this.assets = assets
+      this.rosters = rosters
+      this.participants = Object.values(participants)
+    } else {
+      this.id = data.id
+    }
+  }
 
-			return this
-		} catch(err) {
-			throw err
-		}
-	}
+  async get() {
+    try {
+      const res = await this._api.getMatch({ id: this.id })
+
+      Object.assign(this, res)
+
+      return this
+    } catch(err) {
+      throw err
+    }
+  }
 }
 
 module.exports = Match

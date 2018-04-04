@@ -8,33 +8,33 @@ class Player {
     this.raw = data
 
     if(data.attributes) {
-			const { id, attributes, relationships } = data
+      const { id, attributes, relationships } = data
 
-	    this.id = id
-	    this.attributes = attributes
-	    this.matches = relationships.matches
-	    this.assets = relationships.assets
+      this.id = id
+      this.attributes = attributes
+      this.matches = relationships.matches
+      this.assets = relationships.assets
 
-	    const matches = []
-	    for(let i = 0; i < this.matches.data.length; i++) {
-	      const m = this.matches.data[i]
+      const matches = []
+      for(let i = 0; i < this.matches.data.length; i++) {
+        const m = this.matches.data[i]
 
-	      matches.push(new Match(m, this._api))
-	    }
+        matches.push(new Match(m, null, this._api))
+      }
 
-	    this.matches = matches
+      this.matches = matches
 
-	    const assets = []
-	    for(let i = 0; i < this.assets.data.length; i++) {
-	      const a = this.assets.data[i]
+      const assets = []
+      for(let i = 0; i < this.assets.data.length; i++) {
+        const a = this.assets.data[i]
 
-	      assets.push(new Asset(a, this._api))
-	    }
+        assets.push(new Asset(a, this._api))
+      }
 
-	    this.assets = assets
-	  } else {
-	  	this.id = data.id
-	  }
+      this.assets = assets
+    } else {
+      this.id = data.id
+    }
   }
 
   async get() {
