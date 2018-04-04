@@ -12,6 +12,7 @@ PUBG Web [API](https://documentation.playbattlegrounds.com) wrapper for nodejs
 - - [Match](#match)
 - - [Participant](#participant)
 - - [Roster](#roster)
+- - [Asset](#asset)
 
 # Todo
 - Telemetry
