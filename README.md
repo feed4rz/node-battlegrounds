@@ -109,10 +109,61 @@ Represents a Match. If only contains its **id**, **get** method has to be called
 - - **stats**
 - - **tags**
 - - **titleId**
-- **rosters** - An array of Rosters
+- **rosters** - An array of [Rosters](#roster)
 - **assets** - An array of Assets
 - **rounds** - An array of Rounds
 - **spectators** - An array of Spectators
+- **participants** - An array of [Participants](#participant)
 
 ### Match.get()
 Calls an API to get Match's full info and returns itself.
+
+## Participant
+Represents a [Match](#match) Participant.
+
+- **id** - Participant id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
+- **attributes**
+- - **actor**
+- - **shardId** - platform id (as described in [Usage](#usage))
+- - **stats**
+- - - **DBNOs**
+- - - **assists** - assists
+- - - **boosts** - boosts used
+- - - **damageDealt** - damage dealt to others
+- - - **deathType** - death type. Can be ```byplayer``` or ```suicide```
+- - - **headshotKills** - headshot kills
+- - - **heals** - heals
+- - - **killPlace** - place by kills
+- - - **killPoints** - kill points
+- - - **killPointsDelta**
+- - - **killStreaks**
+- - - **kills** - kills
+- - - **lastKillPoints**
+- - - **lastWinPoints**
+- - - **longestKill**
+- - - **mostDamage**
+- - - **name** - [Player](#player) name
+- - - **playerId** - [Player](#player) id. Has a format of ```account.x``` where x - 32 char hex
+- - - **revives** - revives
+- - - **rideDistance** - distance driven on a vehicle
+- - - **roadKills** - kills by vehicle
+- - - **teamKills** - team kills
+- - - **timeSurvived** - total time survived in seconds
+- - - **vehicleDestroys** - vehicles destroyed
+- - - **walkDistance** - distance a [Player](#player) has walked
+- - - **weaponsAcquired**
+- - - **winPlace** - win place
+- - - **winPoints** - total win points
+- - - **winPointsDelta**
+
+## Roster
+Represents a team of [Participants](#participants) in a [Match](#match)
+
+- **id** - Roster id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
+- **attributes**
+- - **shardId** - platform id (as described in [Usage](#usage))
+- - **won** - Boolean. Whenever Roster won or not
+- - **stats**
+- - - **rank** - Roster rank
+- - - **teamId** - Roster team number in [Match](#match) in order of joining
+- **participants** - Roster [Participants](#participant)
