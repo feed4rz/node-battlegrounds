@@ -1,6 +1,5 @@
-# battlegrounds
-PUBG Web [API](https://documentation.playbattlegrounds.com) wrapper for nodejs
-
+# PUBG Web API wrapper for nodejs
+- [Full Documentation (Source)](https://documentation.playbattlegrounds.com)
 - [Installation](#install)
 - [To Do](#todo)
 - [Usage](#usage)
