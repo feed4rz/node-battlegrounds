@@ -15,8 +15,9 @@
 
 # Todo
 - Telemetry
-- Rosters class (not yet introduced in API)
-- Assets class
+- - ~~Fetch~~
+- - Object class
+- - Applied Player class
 - Spectators class (not yet introduced in API)
 - Rounds class (not yet introduced in API)
 
