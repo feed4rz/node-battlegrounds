@@ -2,6 +2,7 @@
 PUBG Web [API](https://documentation.playbattlegrounds.com) wrapper for nodejs
 
 - [Installation](#install)
+- [To Do](#todo)
 - [Usage](#usage)
 - [Description](#description)
 - [Examples](https://github.com/feed4rz/node-battlegrounds/tree/master/examples)
@@ -10,6 +11,12 @@ PUBG Web [API](https://documentation.playbattlegrounds.com) wrapper for nodejs
 - - [Player](#player)
 - - [Match](#match)
 
+# Todo
+- Telemetry
+- Rosters class (not yet introduced in API)
+- Assets class
+- Spectators class (not yet introduced in API)
+- Rounds class (not yet introduced in API)
 
 # Install
 Clone this repo and include **index.js** or install via npm:
