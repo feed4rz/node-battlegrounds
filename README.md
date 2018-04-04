@@ -61,7 +61,7 @@ List of all classes returned by a module
 Is returned by module when required
 
 - **apikey** - your apikey (you can get it [here](https://developer.playbattlegrounds.com))
-- **platform** (optional) - default platform id to be included as a parameter in every method. Full list [here](https://documentation.playbattlegrounds.com/en/making-requests.html#regions)
+- **platform** (optional) - default platform id to be included as a parameter in every method. Full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards))
 
 ### API.getMatch(params)
 Returns a [Match](#match) class
@@ -88,7 +88,7 @@ Represents a Player. If only contains its **id**, [get](#playerget) method has t
 - **id** - Player id. Has a format of ```account.x``` where x - 32 char hex
 - **attributes**
 - - **Name** - Player name
-- - **shardId** - platform id (as described in [Usage](#usage))
+- - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
 - - **createdAt** - date when the object was created
 - - **patchVersion**
 - - **titleId**
@@ -107,7 +107,7 @@ Represents a Match. If only contains its **id**, **get** method has to be called
 - - **duration** - duration time in seconds
 - - **gameMode** - game mode (for ex duo-fpp, squad-tpp, etc)
 - - **patchVersion**
-- - **shardId** - platform id (as described in [Usage](#usage))
+- - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards))
 - - **stats**
 - - **tags**
 - - **titleId**
@@ -126,7 +126,7 @@ Represents a [Match](#match) Participant.
 - **id** - Participant id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
 - **attributes**
 - - **actor**
-- - **shardId** - platform id (as described in [Usage](#usage))
+- - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
 - - **stats**
 - - - **DBNOs**
 - - - **assists** - assists
@@ -163,7 +163,7 @@ Represents a team of [Participants](#participant) in a [Match](#match)
 
 - **id** - Roster id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
 - **attributes**
-- - **shardId** - platform id (as described in [Usage](#usage))
+- - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
 - - **won** - Boolean. Whenever Roster won or not
 - - **stats**
 - - - **rank** - Roster rank
