@@ -10,8 +10,8 @@ PUBG Web [API](https://documentation.playbattlegrounds.com) wrapper for nodejs
 - - [API](#apiapikey-platform)
 - - [Player](#player)
 - - [Match](#match)
-- - [Roster](#roster)
 - - [Participant](#participant)
+- - [Roster](#roster)
 
 # Todo
 - Telemetry
@@ -159,7 +159,7 @@ Represents a [Match](#match) Participant.
 - - - **winPointsDelta**
 
 ## Roster
-Represents a team of [Participants](#participants) in a [Match](#match)
+Represents a team of [Participants](#participant) in a [Match](#match)
 
 - **id** - Roster id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
 - **attributes**
