@@ -22,8 +22,22 @@ async function getMatch(player) {
 
     console.log('result:')
     console.log(res)
+
+    getAsset(res.assets[0])
   } catch(err) {
   	console.log('error:')
+    console.error(err)
+  }
+}
+
+async function getAsset(asset) {
+  try {
+    const res = await asset.fetch()
+
+    console.log('result:')
+    console.log(res)
+  } catch(err) {
+    console.log('error:')
     console.error(err)
   }
 }

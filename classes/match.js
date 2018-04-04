@@ -22,13 +22,7 @@ class Match {
       const rosters = []
       const assets = []
       const participants = []
-
-      for(let i = 0; i < this.assets.length; i++) {
-        const a = this.assets[i]
-
-        assets.push(new Asset(a, this._api))
-      }
-
+      
       for(let i = 0; i < included.length; i++) {
         const inc = included[i]
 
@@ -36,6 +30,8 @@ class Match {
           rosters.push(new Roster(inc, this._api))
         } else if(inc.type == 'participant') {
           participants[inc.id] = new Participant(inc, this._api)
+        } else if(inc.type == 'asset') {
+        	assets.push(new Asset(inc, this._api))
         }
       }
 

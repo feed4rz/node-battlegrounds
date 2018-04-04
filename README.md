@@ -93,7 +93,7 @@ Represents a Player. If only contains its **id**, [get](#playerget) method has t
 - - **patchVersion**
 - - **titleId**
 - **matches** - An array of Player [Matches](#match)
-- **assets** - An array of Player Assets
+- **assets** - An array of Player [Assets](#asset)
 
 ### Player.get()
 Calls an API to get Player's full info and returns itself.
@@ -110,9 +110,9 @@ Represents a Match. If only contains its **id**, **get** method has to be called
 - - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards))
 - - **stats**
 - - **tags**
-- - **titleId**
+- - **titleId** - tournament title. For regular matches will be ```bluehole-pubg```
 - **rosters** - An array of [Rosters](#roster)
-- **assets** - An array of Assets
+- **assets** - An array of [Assets](#asset)
 - **rounds** - An array of Rounds
 - **spectators** - An array of Spectators
 - **participants** - An array of [Participants](#participant)
@@ -169,3 +169,18 @@ Represents a team of [Participants](#participant) in a [Match](#match)
 - - - **rank** - Roster rank
 - - - **teamId** - Roster team number in [Match](#match) in order of joining
 - **participants** - Roster [Participants](#participant)
+
+## Asset
+Represents an Asset with an attached resource
+
+- **id** - Asset id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
+- **attributes**
+- - **URL** - resource url. You can download it using [fetch](#assetfetch) method
+- - **createdAt** - date when the object was created
+- - **description**
+- - **name** - for [Match](#match) Assets will be ```telemetry```
+
+## Asset.fetch()
+Fetches Asset content from **URL**. Returns different objects depending on type (**name**) of an Asset:
+
+- [Telemetry](https://documentation.playbattlegrounds.com/en/telemetry.html)

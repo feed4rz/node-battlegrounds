@@ -148,6 +148,28 @@ class API {
       throw err
     }
   }
+
+  async fetch(url) {
+    const headers = {
+      'Accept': 'application/vnd.api+json'
+    }
+
+    /* Making sure known statuses wont cause unhandled rejections */
+    let validateStatus = status => {
+      return status == 200 || status == 401 || status == 404 || status == 415 || status == 429
+    }
+
+    try {
+      const res = await axios({ url, headers, validateStatus })
+
+      if(res.status == 404 || res.status == 401 || res.status == 415) throw new RequestError(res.data)
+      if(res.status == 429) throw new RequestError([{ title: 'Access Denied', detail: 'Too many requests' }])
+
+      return res.data
+    } catch(err) {
+      throw err
+    }
+  }
 }
 
 module.exports = API
