@@ -139,8 +139,8 @@ class API {
     try {
       const res = await this._req(path)
 
-      for(let i = 0; i < res.length; i++) {
-        res[i] = new Player(res[i], this)
+      for(let i = 0; i < res.data.length; i++) {
+        res[i] = new Player(res.data[i], this)
       }
 
       return res
