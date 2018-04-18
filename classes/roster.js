@@ -8,7 +8,7 @@ class Roster {
 
       this.id = id
       this.attributes = attributes
-      this.participants = relationships.participants.data
+      this.participants = (relationships.participants ||  { data: [] }).data
     } else {
       this.id = data.id
     }

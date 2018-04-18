@@ -13,10 +13,10 @@ class Match {
 
       this.id = id
       this.attributes = attributes
-      this.rosters = relationships.rosters.data
-      this.assets = relationships.assets.data
-      this.spectators = relationships.spectators.data
-      this.rounds = relationships.rounds.data
+      this.rosters = (relationships.rosters || { data: [] }).data
+      this.assets = (relationships.assets ||  { data: [] }).data
+      this.spectators = (relationships.spectators ||  { data: [] }).data
+      this.rounds = (relationships.rounds ||  { data: [] }).data
       this.participants = []
 
       const rosters = []

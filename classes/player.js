@@ -12,8 +12,8 @@ class Player {
 
       this.id = id
       this.attributes = attributes
-      this.matches = relationships.matches
-      this.assets = relationships.assets
+      this.matches = relationships.matches || []
+      this.assets = relationships.assets || []
 
       const matches = []
       for(let i = 0; i < this.matches.data.length; i++) {
