@@ -4,6 +4,7 @@ const axios = require('axios')
 /* Classes */
 const Player = require('./player.js')
 const Match = require('./match.js')
+const Sample = require('./sample.js')
 
 /* Errors */
 const InvalidParameter = require('../errors/InvalidParameter.js')
@@ -25,13 +26,13 @@ class API {
 
     /* Making sure known statuses wont cause unhandled rejections */
     let validateStatus = status => {
-      return status == 200 || status == 401 || status == 404 || status == 415 || status == 429
+      return status == 200 || status == 401 || status == 404 || status == 415 || status == 429 || status == 400
     }
 
     try {
       const res = await axios({ url, baseURL, headers, validateStatus })
 
-      if(res.status == 404 || res.status == 401 || res.status == 415) throw new RequestError(res.data)
+      if(res.status == 404 || res.status == 401 || res.status == 415 || res.status == 400) throw new RequestError(res.data)
       if(res.status == 429) throw new RequestError([{ title: 'Access Denied', detail: 'Too many requests' }])
 
       return res.data
@@ -59,11 +60,39 @@ class API {
 
   /*
     match:
+      /samples
+    data:
+      { date }
+  */
+  async getSamples(params = {}) {
+    /* Validating parameters */
+    if(params.date && !(params.date instanceof Date)) {
+      throw new InvalidParameter('date')
+    }
+
+    let param = ''
+    if(params.date) param = `/?filter[createdAt-start]=${params.date.toISOString().split('.')[0]}Z`
+
+    /* Applying parameters to path */
+    const platform = params.platform || this.platform
+    const path = `/${platform}/samples${param}`
+
+    try {
+      const res = await this._req(path)
+
+      return new Sample(res.data, this)
+    } catch(err) {
+      throw err
+    }
+  }
+
+  /*
+    match:
       /matches/{id}
     data:
       { id }
   */
-  async getMatch(params) {
+  async getMatch(params = {}) {
     /* Validating parameters */
     if(!params.id) throw new MissingParameter('id')
     if(!this._valid(params.id, /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i)) {
@@ -77,6 +106,8 @@ class API {
     try {
       const res = await this._req(path)
 
+      console.log(res.data)
+
       return new Match(res.data, res.included, this)
     } catch(err) {
       throw err
@@ -89,7 +120,7 @@ class API {
     data:
       { id }
   */
-  async getPlayer(params) {
+  async getPlayer(params = {}) {
     /* Validating parameters */
     if(params.id && !this._valid(params.id, /account\.[0-9a-f]{32}/i)) {
       throw new InvalidParameter('id')
@@ -114,7 +145,7 @@ class API {
     data:
       { ids, names }
   */
-  async getPlayers(params) {
+  async getPlayers(params = {}) {
     /* Validating parameters */
     if(params.ids && !this._valid(params.ids, /account\.[0-9a-f]{32}/i)) {
       throw new InvalidParameter('ids')
@@ -156,13 +187,13 @@ class API {
 
     /* Making sure known statuses wont cause unhandled rejections */
     let validateStatus = status => {
-      return status == 200 || status == 401 || status == 404 || status == 415 || status == 429
+      return status == 200 || status == 401 || status == 404 || status == 415 || status == 429 || status == 400
     }
 
     try {
       const res = await axios({ url, headers, validateStatus })
 
-      if(res.status == 404 || res.status == 401 || res.status == 415) throw new RequestError(res.data)
+      if(res.status == 404 || res.status == 401 || res.status == 415 || res.status == 400) throw new RequestError(res.data)
       if(res.status == 429) throw new RequestError([{ title: 'Access Denied', detail: 'Too many requests' }])
 
       return res.data

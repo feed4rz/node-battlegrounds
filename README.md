@@ -64,10 +64,17 @@ Is returned by module when required
 - **apikey** - your apikey (you can get it [here](https://developer.playbattlegrounds.com))
 - **platform** (optional) - default platform id to be included as a parameter in every method. Full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards))
 
+### API.getSamples(params)
+Returns a [Sample](#sample) class
+
+- **date** (optional) - an instance of Date class. Has to be at least 24hrs in the past. Default value is 24 hours ago.
+
 ### API.getMatch(params)
 Returns a [Match](#match) class
 
 - **id** - [Match](#match) id
+
+**Note**: currently it is not possible to get custom Matches.
 
 ### API.getPlayers(params)
 Returns a list of [Player](#player) classes
@@ -185,3 +192,13 @@ Represents an Asset with an attached resource
 Fetches Asset content from **URL**. Returns different objects depending on type (**name**) of an Asset:
 
 - [Telemetry](https://documentation.playbattlegrounds.com/en/telemetry.html)
+
+## Sample
+Represents a list of [Matches](#match)
+
+- **id** - Asset id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
+- **attributes**
+- - **createdAt** - date when the object was created
+- - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
+- - **titleId** - tournament title. For regular matches will be ```bluehole-pubg```
+- **matches** -  - An array of [Matches](#match)
