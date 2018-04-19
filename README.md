@@ -201,4 +201,4 @@ Represents a list of [Matches](#match)
 - - **createdAt** - date when the object was created
 - - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
 - - **titleId** - tournament title. For regular matches will be ```bluehole-pubg```
-- **matches** -  - An array of [Matches](#match)
+- **matches** - an array of [Matches](#match)
