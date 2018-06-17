@@ -3,6 +3,8 @@ const axios = require('axios')
 
 /* Classes */
 const Player = require('./player.js')
+const Season = require('./season.js')
+const PlayerSeason = require('./player_season.js')
 const Match = require('./match.js')
 const Sample = require('./sample.js')
 
@@ -170,11 +172,69 @@ class API {
     try {
       const res = await this._req(path)
 
+      let response = []
+
       for(let i = 0; i < res.data.length; i++) {
-        res[i] = new Player(res.data[i], this)
+        response.push(new Player(res.data[i], this))
       }
 
-      return res
+      return response
+    } catch(err) {
+      throw err
+    }
+  }
+
+  /*
+    players:
+      /players/{id}/season/{season_id}
+    data:
+      { id, season_id }
+  */
+  async getPlayerSeason(params = {}) {
+    /* Validating parameters */
+    if(!params.id) {
+      throw new MissingParameter('id')
+    }
+    if(!params.season_id) {
+      throw new MissingParameter('season_id')
+    }
+    if(params.id && !this._valid(params.id, /account\.[0-9a-f]{32}/i)) {
+      throw new InvalidParameter('id')
+    }
+
+    /* Applying parameters to path */
+    const platform = params.platform || this.platform
+    const path = `/${platform}/players/${params.id}/seasons/${params.season_id}`
+
+    try {
+      const res = await this._req(path)
+
+      return new PlayerSeason(res.data, this)
+    } catch(err) {
+      throw err
+    }
+  }
+
+  /*
+    season:
+      /season
+    data:
+      { }
+  */
+  async getSeasons(params = {}) {
+    const platform = params.platform || this.platform
+    const path = `/${platform}/seasons`
+
+    try {
+      const res = await this._req(path)
+
+      let response = []
+
+      for(let i = 0; i < res.data.length; i++) {
+        response.push(new Season(res.data[i], this))
+      }
+
+      return response
     } catch(err) {
       throw err
     }
