@@ -97,7 +97,6 @@ Represents a Player. If only contains its **id**, [get](#playerget) method has t
 - **attributes**
 - - **Name** - Player name
 - - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
-- - **createdAt** - date when the object was created
 - - **patchVersion**
 - - **titleId**
 - **matches** - An array of Player [Matches](#match)
@@ -111,6 +110,7 @@ Represents a Match. If only contains its **id**, **get** method has to be called
 
 - **id** - Match id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
 - **attributes**
+- - **isCustomMatch**
 - - **createdAt** - date when the object was created
 - - **duration** - duration time in seconds
 - - **gameMode** - game mode (for ex duo-fpp, squad-tpp, etc)
@@ -136,6 +136,7 @@ Represents a [Match](#match) Participant.
 - - **actor**
 - - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
 - - **stats**
+- - - **swimDistance**
 - - - **DBNOs**
 - - - **assists** - assists
 - - - **boosts** - boosts used
