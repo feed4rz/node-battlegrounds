@@ -97,7 +97,6 @@ Represents a Player. If only contains its **id**, [get](#playerget) method has t
 - **attributes**
 - - **Name** - Player name
 - - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
-- - **createdAt** - date when the object was created
 - - **patchVersion**
 - - **titleId**
 - **matches** - An array of Player [Matches](#match)
