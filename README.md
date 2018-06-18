@@ -12,6 +12,7 @@
 - - [Participant](#participant)
 - - [Roster](#roster)
 - - [Asset](#asset)
+- - [Season](#season)
 
 # Todo
 - Telemetry
@@ -203,3 +204,14 @@ Represents a list of [Matches](#match)
 - - **shardId** - platform id (full list [here](https://github.com/EpicKitten/PUBG-Resources/wiki/API-Shards)))
 - - **titleId** - tournament title. For regular matches will be ```bluehole-pubg```
 - **matches** - an array of [Matches](#match)
+
+## Season
+Represents a game Season
+
+- **id** - Asset id. Has a format of ```a-b-b-b-c``` where a - 8 char hex, b - 4 char hex, c - 12 char hex
+- **attributes**
+- - **isCurrentSeason** - boolean that indicates if season is active or not
+- - **isOffseason** - boolean, true if season is not active
+
+## Season.get()
+Queries all [Seasons](#season) and finds needed one by **id**. Returns update [Season](#season) class:
