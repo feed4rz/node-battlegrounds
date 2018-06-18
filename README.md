@@ -90,6 +90,9 @@ Returns a [Player](#player) class
 
 - **id** - [Player](#player) id
 
+### API.getSeasons(params)
+Returns a list of [Season](#sample) classes
+
 
 ## Player
 Represents a Player. If only contains its **id**, [get](#playerget) method has to be called to get full info about itself.
