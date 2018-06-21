@@ -13,10 +13,10 @@
 - - [Roster](#roster)
 - - [Asset](#asset)
 - - [Season](#season)
+- - [PlayerSeason](#playerseason)
 
 # Todo
 - Telemetry
-- - ~~Fetch~~
 - - Object class
 - - Applied Player class
 - Spectators class (not yet introduced in API)
@@ -91,8 +91,13 @@ Returns a [Player](#player) class
 - **id** - [Player](#player) id
 
 ### API.getSeasons(params)
-Returns a list of [Season](#sample) classes
+Returns a list of [Season](#season) classes
 
+### API.getPlayerSeason(params)
+Returns a [PlayerSeason](#playerseason) classes
+
+- **id** - [Player](#player) id
+- **season_id** - [Season](#season) id
 
 ## Player
 Represents a Player. If only contains its **id**, [get](#playerget) method has to be called to get full info about itself.
@@ -217,4 +222,47 @@ Represents a game Season
 - - **isOffseason** - boolean, true if season is not active
 
 ## Season.get()
-Queries all [Seasons](#season) and finds needed one by **id**. Returns update [Season](#season) class:
+Queries all [Seasons](#season) and finds needed one by **id**. Returns updated [Season](#season) class
+
+## PlayerSeason
+Represents [Player](#player) [Season](#season) stats
+
+- **attributes**
+- - **assists** -	Number of enemy players this player damaged that were killed by teammates
+- - **boosts** - Number of boost items used
+- - **dBNOs** -	Number of enemy players knocked
+- - **dailyKills**
+- - **damageDealt** -	Total damage dealt. Note: Self inflicted damage is subtracted
+- - **days**
+- - **headshotKills** - Number of enemy players killed with headshots
+- - **heals** -	Number of healing items used
+- - **killPoints** - Points based on how many kills this player had
+- - **kills** -	Number of enemy players killed
+- - **longestKill**
+- - **longestTimeSurvived** -	Longest time survived in a match
+- - **losses** - Number of matches lost
+- - **maxKillStreaks** -
+- - **mostSurvivalTime** - Longest time survived in a match
+- - **revives** - Number of times this player revived teammates
+- - **rideDistance** - Total distance traveled in vehicles measured in meters
+- - **roadKills** -	Number of kills while in a vehicle
+- - **roundMostKills** - Highest number of kills in a single match
+- - **roundsPlayed** - Number of matches played
+- - **suicides** - Number of self-inflicted deaths
+- - **teamKills** -	Number of times this player killed a teammate
+- - **timeSurvived** - Total time survived
+- - **top10s** - Number of times this player made it to the top 10 in a match
+- - **vehicleDestroys** -	Number of vehicles destroyed
+- - **walkDistance** - Total distance traveled on foot measured in meters
+- - **weaponsAcquired** -	Number of weapons picked up
+- - **weeklyKills**
+- - **winPoints**
+- - **wins** - Number of matches won
+- **matchesSolo** - solo tpp [Match](#match) array
+- **matchesSoloFPP** - solo fpp [Match](#match) array
+- **matchesDuo** - duo tpp [Match](#match) array
+- **matchesDuoFPP** - duo fpp [Match](#match) array
+- **matchesSquad** - squad tpp [Match](#match) array
+- **matchesSquadFPP** - squad fpp [Match](#match) array
+- **season** - [Season](#season)
+- **player** - [Player](#player)
