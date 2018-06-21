@@ -1,5 +1,5 @@
 class MissingParameter extends Error {
-	constructor(...agrs) {
+	constructor(...args) {
 		if(!args.length) return
 
     if(args.length == 1) {
