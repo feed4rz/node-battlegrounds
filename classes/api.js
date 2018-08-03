@@ -108,8 +108,6 @@ class API {
     try {
       const res = await this._req(path)
 
-      console.log(res.data)
-
       return new Match(res.data, res.included, this)
     } catch(err) {
       throw err
