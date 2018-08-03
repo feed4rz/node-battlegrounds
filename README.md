@@ -21,6 +21,7 @@
 - - Applied Player class
 - Spectators class (not yet introduced in API)
 - Rounds class (not yet introduced in API)
+- [Tournaments](https://documentation.pubg.com/en/tournaments-endpoint.html)
 
 # Install
 Clone this repo and include **index.js** or install via npm:
